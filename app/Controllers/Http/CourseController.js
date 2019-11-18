@@ -71,20 +71,22 @@ class CourseController {
       }
     
       async update({ request, response, params: { id } }) {
-        const course_name = request.input()
 
         var course = Course.find(id)
-        
-        course.course_name = data.course_name
-        course.startDate = data.startDate
-        course.endDate = data.endDate
-        course.presurveylink = data.presurveylink
-        course.postsurveylink = data.postsurveylink
-        course.codewordAssignStatus = data.codewordAssignStatus
+        var startDate = request.input('startDate')
+        var endDate = request.input('endDate')
+        var presurveylink = request.input('presurveylink')
+        var postsurveylink = request.input('postsurveylink')
+
+
+        course.startDate = course.startDate || startDate
+        course.endDate = course.endDate || endDate
+        course.presurveylink = course.presurveylink || presurveylink
+        course.postsurveylink = course.postsurveylink || postsurveylink
         await course.save()
     
         if (users && users.length > 0) {
-          // await course.users().detach()
+          await course.users().detach()
           await course.users().attach(users)
           course.users = await course.users().fetch()
         }

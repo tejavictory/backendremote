@@ -95,6 +95,17 @@ class UserController {
         })
       }
 
+      async update({ request, response, params: { id } }) {
+        const user = await User.findBy('id', id)
+        
+        await user.delete()
+    
+        response.status(200).json({
+          message: 'Successfully deleted this user.',
+          data: user
+        })
+      }
+
       async activate({ auth, request, response }) {
         var atob = require('atob')
         var token = request.input('usertoken')
