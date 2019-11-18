@@ -81,6 +81,10 @@ module.exports = {
     domain: Env.get('MAILGUN_DOMAIN'),
     region: Env.get('MAILGUN_API_REGION'),
     apiKey: Env.get('MAILGUN_API_KEY'),
+    auth: {
+      user: Env.get('MAIL_USERNAME'),
+      pass: Env.get('MAIL_PASSWORD')
+    },
     extras: {}
   },
 
