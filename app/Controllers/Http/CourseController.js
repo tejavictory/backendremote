@@ -72,17 +72,18 @@ class CourseController {
     
       async update({ request, response, params: { id } }) {
 
-        var course = Course.find(id)
+        var course = await Course.findBy('id', id)
+
         var startDate = request.input('startDate')
         var endDate = request.input('endDate')
         var presurveylink = request.input('presurveylink')
         var postsurveylink = request.input('postsurveylink')
+        var users = request.input('users')
 
-
-        course.startDate = course.startDate || startDate
-        course.endDate = course.endDate || endDate
-        course.presurveylink = course.presurveylink || presurveylink
-        course.postsurveylink = course.postsurveylink || postsurveylink
+        course.startDate = startDate
+        course.endDate = endDate
+        course.presurveylink = presurveylink
+        course.postsurveylink = postsurveylink
         await course.save()
     
         if (users && users.length > 0) {
