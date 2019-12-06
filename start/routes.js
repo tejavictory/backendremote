@@ -61,5 +61,5 @@ Route.get('/isUniqueName/:name','CodewordsetController.isUniqueName')
 Route.get('/reqUsers','InsrequestController.index')
 Route.post('/reqIns','InsrequestController.store')
 Route.post('/updatereq/:username','InsrequestController.update')
-Route.get('/getreqstat','InsrequestController.getreq')
+Route.get('/getreqstat/:username','InsrequestController.getreq')
 

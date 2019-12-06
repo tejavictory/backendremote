@@ -85,23 +85,12 @@ class UserController {
         const role_name = request.input('role_name')
 
         const user = await User.findBy('username',username)
-        
+        console.log(user)
         user.role_name = role_name
         await user.save()
     
         response.status(200).json({
           message: 'Successfully updated this user role.',
-          data: user
-        })
-      }
-
-      async update({ request, response, params: { id } }) {
-        const user = await User.findBy('id', id)
-        
-        await user.delete()
-    
-        response.status(200).json({
-          message: 'Successfully deleted this user.',
           data: user
         })
       }
