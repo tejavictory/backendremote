@@ -126,11 +126,15 @@ class CourseController {
 
   async assignSet({ request, response, params: { course_name } }) {
     const setname = request.input('setname')
-
-    var course = await Course.findBy('course_name', course_name)
+    var cname = request.input('coursename')
+    var course = await Course.findBy('course_name', cname)
+    console.log(cname)
 
     course.codewordset = setname
+
+
     await course.save()
+
 
     response.status(200).json({
       message: 'Successfully updated set for this course.',
